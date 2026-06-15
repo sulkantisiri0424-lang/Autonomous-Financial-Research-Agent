@@ -1,0 +1,218 @@
+AUTONOMOUS FINANCIAL RESEARCH AGENT
+
+Project Report
+
+Sulkanti Siri Vennela
+B.Sc Computer Science with Cognitive Systems
+GITAM deemed to be University, Hyderabad.
+
+* ABSTRACT
+
+Financial research often requires collecting and analyzing company information from various sources. Manual research can be time-consuming and inefficient. The Autonomous Financial Research Agent is a Python-based application that automates the process of retrieving company information and generating basic financial research reports.
+The system uses the Yahoo Finance Search API to gather company details such as company name, stock symbol, and exchange information. It then generates a simple research report automatically and stores it in a text file. This project demonstrates the use of APIs, automation, and report generation using Python.
+
+* INTRODUCTION
+
+Financial analysts rely on accurate company information before making investment decisions. Accessing such information manually can be repetitive and time-consuming. Automation can significantly improve efficiency.
+The Autonomous Financial Research Agent allows users to enter a company name and automatically retrieves company details from Yahoo Finance. The application then creates a research report containing the gathered information.
+
+* OBJECTIVES
+
+1. The main objectives of this project are:
+2. Automate company information retrieval
+3. Use financial data sources through APIs
+4. Generate research reports automatically
+5. Reduce manual effort in financial research
+6. Demonstrate API integration using Python
+
+* SYSTEM REQUIREMENTS
+
+1. Software Requirements
+2. Python 3.x
+3. Requests Library
+4. GitHub
+
+* Hardware Requirements
+
+1. Computer or Laptop
+2. Internet Connection
+3. Minimum 4 GB RAM
+
+* TECHNOLOGY STACK
+
+Component                Technology 
+
+Programming Language      python 
+API Integration           Yahoo Finance API
+Library                   Requests
+Version Control           GitHub
+Report Storage            Text File
+
+
+* WORKING OF THE SYSTEM
+
+The project follows the following workflow:
+
+1. User enters a company name.
+2. The application sends a request to Yahoo                 Finance Search API.
+3. Company information is retrieved.
+4. Information is displayed to the user.
+5. A financial research report is generated.
+6. The report is saved as a text file.
+
+* CODE IMPLEMENTATION
+
+Importing Required Library
+
+Python
+import requests
+
+The Requests library is used to communicate with the Yahoo Finance API.
+
+Company Information Retrieval Function
+
+def get_company_info(company):
+    url = f"https://query1.finance.yahoo.com/v1/finance/search?q={company}"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if "quotes" in data and len(data["quotes"]) > 0:
+            result = data["quotes"][0]
+
+            print("\n--- Company Information ---")
+            print("Name:", result.get("shortname", "N/A"))
+            print("Symbol:", result.get("symbol", "N/A"))
+            print("Exchange:", result.get("exchange", "N/A"))
+        else:
+            print("No company information found.")
+
+    except Exception as e:
+        print("Error:", e)
+
+Python
+
+Description
+
+This function:
+1. Accepts a company name
+2. Connects to Yahoo Finance API
+3. Retrieves company details
+4. Displays company information
+
+* Report Generation Function
+
+Python
+def generate_report(company):
+    report = f"""
+Financial Research Report
+========================
+
+Company: {company}
+
+This report was generated automatically by the
+Autonomous Financial Research Agent.
+
+Basic research completed successfully.
+"""
+
+    with open("report.txt", "w") as file:
+        file.write(report)
+
+    print("Report generated: report.txt")
+
+Description
+
+This function:
+* Creates a financial research report
+* Saves the report to a text file
+* Displays a confirmation message
+
+Main Function
+Python
+def main():
+    company = input("Enter company name: ")
+
+    get_company_info(company)
+    generate_report(company)
+
+if __name__ == "__main__":
+    main()
+
+Description
+
+The main function:
+1. Accepts user input
+2. Calls the company information function
+3. Generates the report
+
+REQUIREMENTS.TXT
+requests
+
+The Requests library must be installed before running the project.
+
+Installation:
+
+Bash
+pip install -r requirements.txt
+README.MD
+Markdown
+# Autonomous Financial Research Agent
+
+## Overview
+
+This project is a prototype financial research agent that:
+
+- Collects company financial information
+- Performs basic analysis
+- Generates a research report
+
+## Technologies Used
+
+- Python
+- Requests Library
+
+## Installation
+
+pip install -r requirements.txt
+
+OUTPUT
+Input
+Plain text
+Enter company name: Apple
+Output
+Plain text
+--- Company Information ---
+
+Name: Apple Inc.
+Symbol: AAPL
+Exchange: NMS
+
+Report generated: report.txt
+
+*ADVANTAGES
+
+1. Fast information retrieval
+2. Easy to use
+3. Automated report generation
+4. Reduces manual effort
+5. Demonstrates API integration
+
+* LIMITATIONS
+
+1. Depends on internet connectivity
+2. Uses basic company information only
+3. Does not perform advanced financial analysis
+
+* FUTURE ENHANCEMENTS
+
+1. Add stock price analysis
+2. Generate PDF reports
+3. Integrate financial ratio calculations
+4. Add company comparison features
+5. Develop a web dashboard using Streamlit
+
+* CONCLUSION
+
+The Autonomous Financial Research Agent successfully demonstrates the use of Python and API integration to automate company information retrieval and report generation. The project simplifies financial research by collecting company details from Yahoo Finance and generating reports automatically. This solution provides a foundation for developing more advanced AI-powered financial research systems in the future.
